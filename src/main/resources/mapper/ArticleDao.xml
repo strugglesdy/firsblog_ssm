@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.blog.dao.ArticleDao">
+    <resultMap id="BaseResultMap" type="com.blog.entity.Article">
+        <id column="article_id" property="articleId" jdbcType="INTEGER"/>
+        <result column="category_id" property="categoryId" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="counts" property="counts" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.blog.entity.Article" extends="BaseResultMap">
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.blog.entity.Article">
+        INSERT INTO article (title,user_id, content, category_id, create_time)
+        VALUES (
+            #{title,jdbcType=VARCHAR},
+            #{userId,jdbcType=INTEGER},
+            #{content,jdbcType=LONGVARCHAR},
+            #{categoryId,jdbcType=INTEGER},
+            #{createTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <select id="selectByArticleId" resultType="Article" parameterType="java.lang.Integer">
+        SELECT
+            a.article_id,
+            a.title,
+            u.user_id,
+            a.category_id,
+            a.content,
+            c.type,
+            a.update_time
+        FROM article a LEFT JOIN category c ON a.`category_id` = c.`category_id`
+            LEFT JOIN user u  ON a.`user_id` = u.`user_id`
+        WHERE a.article_id = #{articleId,jdbcType=INTEGER}
+
+    </select>
+
+    <update id="update" parameterType="com.blog.entity.Article">
+        UPDATE article
+        SET title       = #{title,jdbcType=VARCHAR},
+            content     = #{content,jdbcType=LONGVARCHAR},
+            category_id = #{categoryId,jdbcType=INTEGER},
+            update_time = #{updateTime,jdbcType=TIMESTAMP}
+        WHERE article_id = #{articleId,jdbcType=INTEGER}
+    </update>
+
+    <update id="deleteByArticleId" parameterType="java.lang.Integer">
+        UPDATE article
+        SET is_deleted = #{isDeleted,jdbcType=INTEGER}
+        WHERE article_id = #{articleId,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectByCategoryId" resultType="Article" parameterType="java.lang.Integer">
+        SELECT
+            article_id,
+            title,
+            content,
+            update_time
+        FROM article
+        WHERE is_deleted = 0 AND category_id = #{categoryId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectAllOf" resultMap="ResultMapWithBLOBs" parameterType="Article">
+        SELECT
+        a.article_id,
+        a.title,
+        u.nickname,
+        c.type,
+        a.update_time
+        FROM article a LEFT JOIN category c ON a.`category_id` = c.`category_id`
+        LEFT JOIN user u  ON a.`user_id` = u.`user_id`
+        WHERE 1=1 AND a.is_deleted=0
+        <if test="title != null and title != ''">
+            AND a.title LIKE #{title,jdbcType=VARCHAR}
+        </if>
+        ORDER BY a.`article_id` ASC
+    </select>
+
+    <select id="selectAll" resultType="Article" parameterType="Article">
+        SELECT
+            a.article_id,
+            a.title,
+            u.nickname,
+            c.type,
+            a.update_time
+        FROM article a LEFT JOIN category c ON a.category_id = c.category_id
+            LEFT JOIN user u  ON a.`user_id` = u.`user_id`
+        WHERE a.is_deleted = 0
+        ORDER BY a.article_id ASC
+    </select>
+
+    <!--统计该分类下的文章数-->
+    <select id="countArticleByCategoryId" resultType="Integer">
+        SELECT count(*)
+        FROM article
+        WHERE is_deleted = 0 AND category_id = #{categoryId,jdbcType=INTEGER}
+    </select>
+
+</mapper>

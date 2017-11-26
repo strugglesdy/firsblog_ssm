@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.blog.dao.UserDao">
+    <!--目的:为dao接口方法提供sql语句配置
+ 即针对dao接口中的方法编写我们的sql语句
+ #符会以字符串的形式 与sql进行拼接-->
+    <insert id="insert" parameterType="com.blog.entity.User">
+        INSERT INTO user (username, password,user_avatar, nickname, email, is_enabled, create_time, update_time)
+        VALUES (#{username,jdbcType=VARCHAR},
+                #{password,jdbcType=VARCHAR},
+                #{userAvatar,jdbcType=VARCHAR},
+                #{nickname,jdbcType=VARCHAR},
+                #{email,jdbcType=VARCHAR},
+                #{isEnabled,jdbcType=INTEGER},
+                #{createTime,jdbcType=TIMESTAMP},
+                #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <update id="update" parameterType="com.blog.entity.User">
+        UPDATE user
+        SET
+        password = #{password,jdbcType=VARCHAR},
+        nickname = #{nickname,jdbcType=VARCHAR},
+        user_avatar = #{userAvatar,jdbcType=VARCHAR},
+        email = #{email,jdbcType=VARCHAR},
+        <if test="ip!=null and ip!=''">
+            ip = #{ip,jdbcType=VARCHAR},
+        </if>
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        is_enabled = #{isEnabled,jdbcType=INTEGER}
+        WHERE user_id = #{userId,jdbcType=INTEGER}
+    </update>
+
+    <update id="deleteByUserId" parameterType="java.lang.Integer">
+        UPDATE user
+        SET is_deleted = #{isDeleted,jdbcType=INTEGER}
+        WHERE user_id = #{userId,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectByUserId" resultType="User" parameterType="java.lang.Integer">
+        SELECT
+            user_id,
+            username,
+            password,
+            nickname,
+            email,
+            user_avatar,
+            is_enabled,
+            update_time
+        FROM user
+        WHERE is_deleted = 0 AND user_id = #{userId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByUsername" resultType="User" parameterType="User">
+        SELECT
+            user_id,
+            username,
+            password,
+            nickname,
+            email,
+            ip,
+            user_avatar,
+            create_time,
+            update_time
+        FROM user
+        WHERE is_deleted = 0 AND username = #{username,jdbcType=VARCHAR}
+    </select>
+
+    <select id="listUserByUsername" resultType="User" parameterType="User">
+        SELECT
+            user_id,
+            username,
+            is_enabled,
+            create_time,
+            update_time
+        FROM user
+        WHERE is_deleted = 0 AND username LIKE #{username,jdbcType=VARCHAR}
+    </select>
+
+    <select id="listUser" resultType="User" parameterType="User">
+        SELECT
+            user_id,
+            username,
+            is_enabled,
+            create_time,
+            update_time
+        FROM user
+        WHERE is_deleted = 0
+    </select>
+
+
+</mapper>

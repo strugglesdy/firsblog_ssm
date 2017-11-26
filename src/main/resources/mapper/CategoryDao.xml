@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.blog.dao.CategoryDao">
+
+    <insert id="insert" parameterType="Category">
+        INSERT INTO category (type) VALUES (#{type,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="selectByCategoryId" parameterType="java.lang.Integer" resultType="Category">
+        SELECT * FROM category WHERE is_deleted=0 AND category_id = #{categoryId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByType" parameterType="Category" resultType="Category">
+        SELECT * FROM category WHERE is_deleted=0 AND type = #{type,jdbcType=VARCHAR}
+    </select>
+    <update id="deleteByCategoryId" parameterType="java.lang.Integer">
+        UPDATE category
+        SET is_deleted = #{isDeleted,jdbcType=INTEGER}
+        WHERE category_id = #{categoryId,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectAllOf" resultType="Category" parameterType="Category">
+        SELECT category_id,type FROM category WHERE is_deleted=0 AND type LIKE #{type,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectAll" resultType="Category" parameterType="Category">
+        SELECT * FROM category WHERE is_deleted=0
+    </select>
+</mapper>
