@@ -23,7 +23,22 @@ public interface ArticleService {
 
     List<Article> listAllOf(String title) throws Exception;
 
-    //获得某个分类的文章数
+    /**
+     * @Title: countArticleByCategoryId
+     * @Description: TODO(获得某个分类的文章数)
+     * @param [categoryId]
+     * @return java.lang.Integer
+     */
     Integer countArticleByCategoryId(Integer categoryId) throws Exception;
+
+    /**
+     * @Title: getArticleDetailById
+     * @Description: TODO(文章详情页面显示)
+     * @param [articleId]
+     * @return com.blog.entity.Article
+     */
+    Article getArticleDetailById(Integer articleId) throws Exception;
+
+
 
 }

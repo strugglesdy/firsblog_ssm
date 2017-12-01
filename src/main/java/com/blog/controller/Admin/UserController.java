@@ -1,4 +1,4 @@
-package com.blog.controller;
+package com.blog.controller.Admin;
 
 import com.blog.entity.User;
 import com.blog.enums.common.IsDeleted;

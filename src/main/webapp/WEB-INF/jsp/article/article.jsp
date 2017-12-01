@@ -53,7 +53,7 @@
                 <tr>
                     <td class="layui-bg-gray">${ status.index + 1}</td>
                     <td>
-                        <a href="" target="_blank">${a.title}</a>
+                        <a href="/home/article/${a.articleId}" target="_blank">${a.title}</a>
                     </td>
                     <td>${a.nickname}</td>
                     <td>

@@ -83,6 +83,7 @@
         SELECT
             a.article_id,
             a.title,
+            a.content,
             u.nickname,
             c.type,
             a.update_time

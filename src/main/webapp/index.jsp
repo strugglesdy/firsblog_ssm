@@ -1,6 +1,6 @@
 <html>
 <script>
-    window.location.href="login";
+    window.location.href="/home/index";
 </script>
 <body>
 </body>

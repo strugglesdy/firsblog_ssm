@@ -2,7 +2,9 @@
 function skip(url,param) {
 	window.location.href = url+param;
 }
-
+function skipfor(url) {
+    window.location.href = url;
+}
 // 刷新
 function reload() {
 	window.location.reload()

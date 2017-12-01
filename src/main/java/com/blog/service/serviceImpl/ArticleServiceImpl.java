@@ -85,4 +85,13 @@ public class ArticleServiceImpl implements ArticleService {
     public Integer countArticleByCategoryId(Integer categoryId) throws Exception {
         return articleDao.countArticleByCategoryId(categoryId);
     }
+
+    @Override
+    public Article getArticleDetailById(Integer articleId) throws Exception {
+        Article article = articleDao.selectByArticleId(articleId);
+        Integer userId = article.getUserId();
+        User user = userDao.selectByUserId(userId);
+        article.setUser(user);
+        return article;
+    }
 }

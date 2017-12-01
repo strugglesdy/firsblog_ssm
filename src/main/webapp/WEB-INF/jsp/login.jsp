@@ -7,7 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" import="java.util.*" language="java" %>
-<html >
+<html>
 
 <head>
     <title>登录界面</title>

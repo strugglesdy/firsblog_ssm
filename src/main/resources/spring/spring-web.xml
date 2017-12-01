@@ -45,15 +45,15 @@
     <!--</bean>-->
 
     <!--配置拦截器-->
-    <mvc:interceptors>
-        <!-- 多个拦截器,顺序执行   /**表示所有url包括子url路径-->
-        <!--登录认证拦截器-->
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <bean class="com.blog.interceptor.LoginInterceptor"/>
-        </mvc:interceptor>
-        <!-- 当设置多个拦截器时，先按顺序调用preHandle方法(1,2)，然后逆序调用每个拦截器的postHandle和afterCompletion方法(2,1) -->
-    </mvc:interceptors>
+    <!--<mvc:interceptors>-->
+        <!--&lt;!&ndash; 多个拦截器,顺序执行   /**表示所有url包括子url路径&ndash;&gt;-->
+        <!--&lt;!&ndash;登录认证拦截器&ndash;&gt;-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/**"/>-->
+            <!--<bean class="com.blog.interceptor.LoginInterceptor"/>-->
+        <!--</mvc:interceptor>-->
+        <!--&lt;!&ndash; 当设置多个拦截器时，先按顺序调用preHandle方法(1,2)，然后逆序调用每个拦截器的postHandle和afterCompletion方法(2,1) &ndash;&gt;-->
+    <!--</mvc:interceptors>-->
 
     <!-- 4.扫描web相关的bean -->
     <context:component-scan base-package="com.blog.controller"/>

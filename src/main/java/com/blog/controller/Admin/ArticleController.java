@@ -1,4 +1,4 @@
-package com.blog.controller;
+package com.blog.controller.Admin;
 
 import com.blog.entity.Article;
 import com.blog.entity.Category;
@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Create 2017/11/15
  */
-@Controller
+@Controller("AdminArticleController")
 @RequestMapping("/article")
 public class ArticleController {
 
