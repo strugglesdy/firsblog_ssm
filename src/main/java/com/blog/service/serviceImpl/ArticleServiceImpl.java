@@ -66,7 +66,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> getByCategoryId(Integer categoryId) throws Exception {
-        return null;
+        return articleDao.selectByCategoryId(categoryId);
     }
 
     @Override

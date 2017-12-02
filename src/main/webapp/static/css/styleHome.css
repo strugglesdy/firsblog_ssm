@@ -210,7 +210,7 @@ html,body,div,span,applet,object,iframe,blockquote,pre,abbr,acronym,address,big,
 	}
 	
 	header.crumbs {
-		font-size: 10px;
+		font-size: 13px;
 		font-weight: bold;
 		/*margin: 0 10px;*/
 	}
@@ -226,6 +226,8 @@ html,body,div,span,applet,object,iframe,blockquote,pre,abbr,acronym,address,big,
 	}
 	
 	article .main-item-1 {
+		font-family:Microsoft YaHei;
+		font-weight:900;
 		font-size: 20px;
 		border-left: 5px #eee solid;
 		line-height: 2em;
@@ -251,6 +253,8 @@ html,body,div,span,applet,object,iframe,blockquote,pre,abbr,acronym,address,big,
 	}
 	
 	article .main-item-4 {
+		font-family: verdana;
+		font-weight:600;
 		float: right;
 		font-size: 18px;
 		box-sizing: border-box;
@@ -276,7 +280,7 @@ html,body,div,span,applet,object,iframe,blockquote,pre,abbr,acronym,address,big,
 	}
 	
 	.aside-title {
-		font-size: 10px;
+		font-size: 13px;
 		font-weight: bold;
 		border-bottom: 1px #eee solid;
 	}
@@ -329,6 +333,7 @@ html,body,div,span,applet,object,iframe,blockquote,pre,abbr,acronym,address,big,
 	}
 	
 	.aside-tag {
+		background-color: #ccc;
 		float: left;
 		border: 1px #eee solid;
 		padding: 5px 5px;

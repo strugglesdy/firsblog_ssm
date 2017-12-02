@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * @ClassName: IndexController
- * @Description: TODO(用一句话描述该文件做什么)
+ * @Description: TODO(前台首页)
  * @author: Sboy
  * @date: 2017/12/1 19:26
  *
@@ -30,6 +30,13 @@ public class IndexController {
     public String IndexView(Model model) throws Exception {
         List<Article> articles = articleService.listAll();
         model.addAttribute("articles", articles);
+        List<Category> categories = categoryService.listAll();
+        model.addAttribute("categories", categories);
         return "home/page/index";
+    }
+
+    @RequestMapping(value = "/about")
+    public String form() throws Exception {
+        return "home/page/about";
     }
 }

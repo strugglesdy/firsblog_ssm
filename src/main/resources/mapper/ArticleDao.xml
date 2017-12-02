@@ -55,12 +55,18 @@
 
     <select id="selectByCategoryId" resultType="Article" parameterType="java.lang.Integer">
         SELECT
-            article_id,
-            title,
-            content,
-            update_time
-        FROM article
-        WHERE is_deleted = 0 AND category_id = #{categoryId,jdbcType=INTEGER}
+            a.article_id,
+            a.title,
+            a.category_id,
+            a.content,
+            a.update_time,
+            u.user_id,
+            u.nickname,
+            c.type
+        FROM article a LEFT JOIN category c ON a.`category_id` = c.`category_id`
+            LEFT JOIN user u  ON a.`user_id` = u.`user_id`
+        WHERE a.is_deleted=0 AND c.category_id= #{categoryId,jdbcType=INTEGER}
+        ORDER BY a.update_time DESC
     </select>
 
     <select id="selectAllOf" resultMap="ResultMapWithBLOBs" parameterType="Article">
@@ -76,7 +82,7 @@
         <if test="title != null and title != ''">
             AND a.title LIKE #{title,jdbcType=VARCHAR}
         </if>
-        ORDER BY a.`article_id` ASC
+        ORDER BY a.update_time DESC
     </select>
 
     <select id="selectAll" resultType="Article" parameterType="Article">
@@ -90,7 +96,7 @@
         FROM article a LEFT JOIN category c ON a.category_id = c.category_id
             LEFT JOIN user u  ON a.`user_id` = u.`user_id`
         WHERE a.is_deleted = 0
-        ORDER BY a.article_id ASC
+        ORDER BY a.update_time DESC
     </select>
 
     <!--统计该分类下的文章数-->
