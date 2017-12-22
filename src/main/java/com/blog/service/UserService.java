@@ -64,5 +64,11 @@ public interface UserService {
      */
     List<User> listUserByname(String username) throws Exception;
 
-
+    /**
+     * @Title: countUser
+     * @Description: TODO(用户总数)
+     * @param []
+     * @return java.lang.Integer
+     */
+    Integer countUser() throws Exception;
 }

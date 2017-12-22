@@ -94,4 +94,10 @@ public class ArticleServiceImpl implements ArticleService {
         article.setUser(user);
         return article;
     }
+
+    @Override
+    public Integer countArticle() throws Exception {
+        Integer articleCounts = articleDao.countArticle();
+        return articleCounts;
+    }
 }

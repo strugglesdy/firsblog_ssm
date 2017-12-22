@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean modifyIsDeletedById(Integer userId,Integer isDeleted) throws Exception {
+    public boolean modifyIsDeletedById(Integer userId, Integer isDeleted) throws Exception {
 //        User user = new User();
 //        user.setUserId(userId);
 //        user.setIsEnabled(isDeleted);
@@ -64,5 +64,11 @@ public class UserServiceImpl implements UserService {
     public List<User> listUserByname(String username) throws Exception {
         List<User> userList = userDao.listUserByUsername(username);
         return userList;
+    }
+
+    @Override
+    public Integer countUser() throws Exception {
+        Integer userCounts = userDao.countUser();
+        return userCounts;
     }
 }

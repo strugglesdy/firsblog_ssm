@@ -38,7 +38,12 @@ public interface ArticleService {
      * @return com.blog.entity.Article
      */
     Article getArticleDetailById(Integer articleId) throws Exception;
-
-
+    /**
+     * @Title: countArticle
+     * @Description: TODO(文章总数)
+     * @param []
+     * @return java.lang.Integer
+     */
+    Integer countArticle() throws Exception;
 
 }

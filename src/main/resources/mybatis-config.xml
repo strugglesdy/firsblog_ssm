@@ -15,5 +15,7 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
 
-
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageHelper"></plugin>
+    </plugins>
 </configuration>

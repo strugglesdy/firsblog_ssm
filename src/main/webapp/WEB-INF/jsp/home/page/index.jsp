@@ -78,7 +78,7 @@
                     <div class="about-me">
                         <div class="profile">
                             <div class="info">
-                                <h1>SunLife<span class="born">Born in：1949-10-1</span></h1>
+                                <h1>Spider-Man<span class="born">Born in：1949-10-1</span></h1>
                                 <p>Sboy Design</p>
                                 <p>&copy; 2017 拾荒者</p>
                             </div>
@@ -91,10 +91,10 @@
     <div class="clear"></div>
     <nav class="navigator">
         <c:if test="${pageInfo.hasPreviousPage}">
-            <a href="${APP_PATH }/selectAllBlog?pn=${pageInfo.pageNum-1}">Previous page</a>
+            <a href="${APP_PATH }/home/index?pn=${pageInfo.pageNum-1}">Previous page</a>
         </c:if>
         <c:if test="${pageInfo.hasNextPage}">
-            <a href="${APP_PATH }/selectAllBlog?pn=${pageInfo.pageNum+1}">Next page</a>
+            <a href="${APP_PATH }/home/index?pn=${pageInfo.pageNum+1}">Next page</a>
         </c:if>
     </nav>
     <div class="clear"></div>

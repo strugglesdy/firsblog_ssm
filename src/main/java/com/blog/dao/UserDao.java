@@ -48,12 +48,19 @@ public interface UserDao {
      * @param username
      * @return
      */
-    List<User> listUserByUsername(String username);
+    List<User> listUserByUsername(@Param("username") String username);
 
     /**
      * 用户列表
      * @return
      */
     List<User> listUser();
+    /**
+     * @Title: countUser
+     * @Description: TODO(用户总数)
+     * @param []
+     * @return java.lang.Integer
+     */
+    Integer countUser();
 
 }

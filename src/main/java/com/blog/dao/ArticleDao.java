@@ -62,6 +62,12 @@ public interface ArticleDao {
      */
     Integer countArticleByCategoryId(Integer categoryId);
 
-
+    /**
+     * @Title: countArticle
+     * @Description: TODO(文章总数)
+     * @param []
+     * @return java.lang.Integer
+     */
+    Integer countArticle();
 
 }

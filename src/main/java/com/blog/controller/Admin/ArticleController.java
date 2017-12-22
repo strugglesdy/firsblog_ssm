@@ -92,25 +92,21 @@ public class ArticleController {
     @RequestMapping(value = "/editSubmit", method = RequestMethod.POST)
     @ResponseBody
     public ModelMap editSubmit(Article article, Integer categoryId, HttpServletRequest request) throws Exception {
+        if (StringUtils.isEmpty(article.getTitle())) {
+            return ReturnUtil.Error("请输入标题");
+        }
+        if (categoryId == null) {
+            return ReturnUtil.Error("请选择分类");
+        }
+
+        if (request.getSession().getAttribute("username") == null) {
+            return ReturnUtil.Error("无用户信息");
+        }
+
         if (article.getArticleId() != null) {
-            if (StringUtils.isEmpty(article.getTitle())) {
-                return ReturnUtil.Error("请输入标题");
-            }
-            if (categoryId == null) {
-                return ReturnUtil.Error("请选择分类");
-            }
             articleService.updateArticle(article);
             return ReturnUtil.Success("修改成功");
         } else {
-            if (StringUtils.isEmpty(article.getTitle())) {
-                return ReturnUtil.Error("请输入标题");
-            }
-            if (categoryId == null) {
-                return ReturnUtil.Error("请选择分类");
-            }
-            if (request.getSession().getAttribute("username") == null) {
-                return ReturnUtil.Error("无用户信息");
-            }
             articleService.addArticle(article);
             return ReturnUtil.Success("添加成功");
         }
@@ -137,7 +133,6 @@ public class ArticleController {
         }
 
         model.addAttribute("article", article);
-
         return "/article/edit";
     }
 

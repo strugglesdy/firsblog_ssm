@@ -5,7 +5,6 @@
         <id column="article_id" property="articleId" jdbcType="INTEGER"/>
         <result column="category_id" property="categoryId" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
-        <result column="counts" property="counts" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
@@ -14,7 +13,7 @@
     </resultMap>
 
     <insert id="insert" parameterType="com.blog.entity.Article">
-        INSERT INTO article (title,user_id, content, category_id, create_time)
+        INSERT INTO article (title, user_id, content, category_id, create_time)
         VALUES (
             #{title,jdbcType=VARCHAR},
             #{userId,jdbcType=INTEGER},
@@ -33,7 +32,7 @@
             c.type,
             a.update_time
         FROM article a LEFT JOIN category c ON a.`category_id` = c.`category_id`
-            LEFT JOIN user u  ON a.`user_id` = u.`user_id`
+            LEFT JOIN user u ON a.`user_id` = u.`user_id`
         WHERE a.article_id = #{articleId,jdbcType=INTEGER}
 
     </select>
@@ -64,8 +63,8 @@
             u.nickname,
             c.type
         FROM article a LEFT JOIN category c ON a.`category_id` = c.`category_id`
-            LEFT JOIN user u  ON a.`user_id` = u.`user_id`
-        WHERE a.is_deleted=0 AND c.category_id= #{categoryId,jdbcType=INTEGER}
+            LEFT JOIN user u ON a.`user_id` = u.`user_id`
+        WHERE a.is_deleted = 0 AND c.category_id = #{categoryId,jdbcType=INTEGER}
         ORDER BY a.update_time DESC
     </select>
 
@@ -77,7 +76,7 @@
         c.type,
         a.update_time
         FROM article a LEFT JOIN category c ON a.`category_id` = c.`category_id`
-        LEFT JOIN user u  ON a.`user_id` = u.`user_id`
+        LEFT JOIN user u ON a.`user_id` = u.`user_id`
         WHERE 1=1 AND a.is_deleted=0
         <if test="title != null and title != ''">
             AND a.title LIKE #{title,jdbcType=VARCHAR}
@@ -94,7 +93,7 @@
             c.type,
             a.update_time
         FROM article a LEFT JOIN category c ON a.category_id = c.category_id
-            LEFT JOIN user u  ON a.`user_id` = u.`user_id`
+            LEFT JOIN user u ON a.`user_id` = u.`user_id`
         WHERE a.is_deleted = 0
         ORDER BY a.update_time DESC
     </select>
@@ -104,6 +103,12 @@
         SELECT count(*)
         FROM article
         WHERE is_deleted = 0 AND category_id = #{categoryId,jdbcType=INTEGER}
+    </select>
+
+    <select id="countArticle" resultType="_int">
+        SELECT count(*)
+        FROM article
+        WHERE is_deleted = 0
     </select>
 
 </mapper>

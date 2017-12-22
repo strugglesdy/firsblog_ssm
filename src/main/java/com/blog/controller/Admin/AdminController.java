@@ -1,10 +1,12 @@
 package com.blog.controller.Admin;
 
 import com.blog.entity.User;
+import com.blog.service.ArticleService;
 import com.blog.service.UserService;
 import com.blog.util.MessageType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -22,6 +24,8 @@ public class AdminController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private ArticleService articleService;
 
     /**
      * @Title: loginForm
@@ -69,11 +73,15 @@ public class AdminController {
     /**
      * @Title: index
      * @Description: TODO(后台首页)
-     * @param []
+     * @param [model]
      * @return java.lang.String
      */
     @RequestMapping("/index")
-    public String index() throws Exception {
+    public String index(Model model) throws Exception {
+        Integer userCounts = userService.countUser();
+        model.addAttribute("userCounts", userCounts);
+        Integer articleCounts = articleService.countArticle();
+        model.addAttribute("articleCounts", articleCounts);
         return "index";
     }
 
